@@ -8,6 +8,9 @@ const closeBtnRef = document.querySelector(
   'button[data-action="close-lightbox"]',
 );
 
+closeBtnRef.addEventListener('click', onCloseModal);
+lightboxContentRef.addEventListener('click', onOverlayClick);
+
 // Создание и рендер разметки по массиву данных и предоставленному шаблону.
 
 const createGalleryItem = galleryItem => {
@@ -53,13 +56,10 @@ function onGalleryClick(event) {
   lightboxRef.classList.add('is-open');
   lightboxImageRef.src = largeImageUrl;
 
-  closeBtnRef.addEventListener('click', onCloseModal);
-  lightboxContentRef.addEventListener('click', onOverlayClick);
   document.addEventListener('keydown', onPressEscape);
 }
 
 function onCloseModal() {
-  closeBtnRef.removeEventListener('click', onCloseModal);
   document.removeEventListener('keydown', onPressEscape);
   lightboxRef.classList.remove('is-open');
   lightboxImageRef.src = '';
